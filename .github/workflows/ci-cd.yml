@@ -29,3 +29,12 @@ jobs:
 
       - name: Run tests
         run: dotnet test --no-restore
+# Deploy step
+      - name: Deploy to FTP Server
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.1
+        with:
+          ftp-server: ftp://yourserver.com      # FTP server URL
+          ftp-username: ${{ secrets.FTP_USERNAME }}   # GitHub Secrets for username
+          ftp-password: ${{ secrets.FTP_PASSWORD }}   # GitHub Secrets for password
+          local-dir: ./bin/Release/net9.0    # The directory containing your build output
+          server-dir: /path/to/your/deployment/folder  # Folder on the server to deploy to
