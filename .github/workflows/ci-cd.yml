@@ -16,10 +16,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up .NET 9.0 SDK
+      - name: Set up .NET SDK
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '9.0'  # Change to 9.0 if it's supported
+          dotnet-version: '9.0'
 
       - name: Install dependencies
         run: dotnet restore
@@ -29,12 +29,3 @@ jobs:
 
       - name: Run tests
         run: dotnet test --no-restore
-# Deploy step
-      - name: Deploy to FTP Server
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.1
-        with:
-          ftp-server: ftp://yourserver.com      # FTP server URL
-          ftp-username: ${{ secrets.FTP_USERNAME }}   # GitHub Secrets for username
-          ftp-password: ${{ secrets.FTP_PASSWORD }}   # GitHub Secrets for password
-          local-dir: ./bin/Release/net9.0    # The directory containing your build output
-          server-dir: /path/to/your/deployment/folder  # Folder on the server to deploy to
